@@ -12,21 +12,208 @@
         
     </head>
     <body class="app">
-        <section id="main" data-transition="">
-            <header data-title="letshire"></header>
-            <article id="main-article" class="active">
-                <center>LetsHire Hello world to Lungo!</center>
+        
+        <section id="main">
+            <article id="main-article" class="indented splash active" >
+                <h1>LetsHire</h1>
+                <form class="roundeds">
+                    <input type="text" placeholder="Your username" id="index-username" value />
+                    <input type="password" placeholder="Your password" id="index-password" value />
+                    <a href="#interviews" data-router="section" class="button large theme anchor" data-icon="lock">Login</a>
+                    <a href="#settings" data-router="section" class="button secondary anchor" data-icon="settings">Settings </a>
+                </form>
             </article>
+        </section>
+        
+        <section id="interviews">
+            <header>
+                <nav>
+                    <a href="#user-options" data-icon="vcard" data-router="aside" class="left"></a>
+                    <a href="#about" data-router="section" data-icon="help" class="right"></a>
+                </nav>
+                <strong>user@domain.com</strong>     
+            </header>
+            
+            <article id="interviews-article" class="active list">
+                <ul>
+                    <li class="selectable">
+                        <a href="#interview" data-router="section">
+                            <div class="right tag blue" data-icon="clock">
+                                next Interview
+                            </div>
+                            <strong>Yuan Z.</strong>
+                            <small>10:30 Today @ BoF</small>
+                        </a>    
+                    </li>
+                    <li class="selectable">
+                        <a href="#interview" data-router="section">
+                            <div class="right tag red" data-icon="clock">
+                                in processing
+                            </div>
+                            <strong>Yuan Z.</strong>
+                            <small>10:30 Today @ BoF</small>
+                        </a>    
+                    </li>
+                    <li class="selectable">
+                        <a href="#interview" data-router="section">
+                            <div class="right tag red" data-icon="clock">
+                                in processing
+                            </div>
+                            <strong>Yuan Z.</strong>
+                            <small>10:30 Today @ BoF</small>
+                        </a>    
+                    </li>
+                    <li class="selectable">
+                        <a href="#interview" data-router="section">
+                            <div class="right tag red" data-icon="clock">
+                                in processing
+                            </div>
+                            <strong>Yuan Z.</strong>
+                            <small>10:30 Today @ BoF</small>
+                        </a>    
+                    </li>
+                </ul>    
+            </article>
+            
             <footer>
                 <nav>
-                    <a href="#" data-icon="menu" class="active"></a>
-                    <a href="#" data-icon="share"></a>
-                    <a href="#" data-icon="user"></a>
-                    <a href="#" data-icon="users"></a>
+                    <a href="#interviews" data-icon="refresh"></a>
+                    <a href="#" data-icon="search"></a>
                 </nav>
             </footer>
         </section>
         
+        <aside id="user-options" class="left">
+            <header data-title="Options"></header>
+            <article id="user-options-article" class="active list"> 
+                <ul>
+                    <li class="selectable dark">
+                        <a href="#interviews" data-router="section">
+                            <strong>Interviews Today</strong>    
+                        </a>
+                        
+                    </li>
+                    <li class="selectable dark">
+                        <a href="#interviews" data-router="section">
+                            <strong>Interviews This Week</strong>    
+                        </a>
+                    </li>
+                    <li class="selectable dark">
+                        <a href="#interviews" data-router="section">
+                            <strong>Interviews This Month</strong>    
+                        </a>
+                    </li>
+                    <li class="selectable dark">
+                        <a href="#main" data-router="section">
+                            <strong>Log out</strong>    
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </aside>
+        
+        <section id="interview">
+            <header data-title="Interview Details" data-back="left blue"></header>
+            
+            <nav class="groupbar">
+                <a href="#interview-article-basic" data-router="article" class="active">
+                    Basic Info
+                </a>
+                <a href="#interview-article-attachment" data-router="article">
+                    Attachments
+                </a>
+            </nav>
+            
+            <article id="interview-article-basic" class="active">
+                <div class="form">
+                    <fieldset>
+                        <input disabled>
+                    </fieldset>
+                    <fieldset data-icon="user">
+                        <label>Name:</label>
+                        <input id="interview-details-name" type="text" value="Yuan Z." disabled>
+                    </fieldset>
+                    <fieldset data-icon="eye">
+                        <label>Apply:</label>
+                        <input id="interview-details-apply" type="text" value="Software Engineer" disabled>
+                    </fieldset>
+                    <fieldset data-icon="calendar">
+                        <label>Time:</label>
+                        <input id="interview-details-time" type="text" value="10:30 Today" disabled>
+                    </fieldset>
+                    <fieldset data-icon="compass">
+                        <label>Location:</label>
+                        <input id="interview-details-location" type="text" value="Bof" disabled>
+                    </fieldset>
+                    <fieldset data-icon="ticket">
+                        <label>Status:</label>
+                        <input id="interview-details-status" type="text" value="Ready" disabled>
+                    </fieldset>
+                    <fieldset data-icon="phone">
+                        <label>Phone:</label>
+                        <input id="interview-details-phone" type="text" value="156******75" disabled>
+                    </fieldset>
+                </div>
+            </article>
+            
+            <article id="interview-article-attachment">
+                TODO: attachemnts gallery
+            </article>
+            
+            <footer>
+                <nav>
+                    <a id="interivew-action" href="#" data-icon="clock" class="active"></a>
+                    <a id="interview-attach-picture" href="#" data-icon="picture" ></a>
+                    <a id="interview-attach-audio" href="#" data-icon="microphone" ></a>
+                    <a id="interview-feedback" href="#" data-icon="pencil" ></a>
+                </nav>
+            </footer>
+        </section>
+
+        <section id="feedback">
+            <header data-title="Feedback" data-back="left blue"></header>
+            <article id="feedback-article" class="active">
+                <div class="form">
+                    <fieldset>
+                        <textarea id="feedback-textarea" rows="5" autofocus></textarea>    
+                    </fieldset>
+                    <a href="#" class="button anchor">Save</a>
+                </div>
+            </article>
+        </section>
+        
+        <section id="settings">
+            <header data-title="Settings" data-back="left blue"></header>
+            <article id="settings-article" class="active">
+                <div class="form">
+                    <fieldset>
+                        <label>Server:</label>
+                        <br>
+                        <input type="text">
+                    </fieldset>
+                    <fieldset>
+                        <label>Port:</label>
+                        <br>
+                        <input type="text">
+                    </fieldset>
+                    <a href="#" class="button anchor">Save</a>                    
+                </div>    
+            </article>
+        </section>
+        
+        <section id="about">
+            <header data-title="About" data-back="left blue"></header>
+            <article id="about-article" class="active">
+                <div>
+                    <center><h1>LetsHire Mobile</h1></center>
+                    <br>
+                    <center><a href="http://letshire.cloudfoundry.com">letshire.cloudfoundry.com</a></center>
+                    <br>
+                    <center>by</center>
+                    <center><h3>Tempest Dev Empathy</h3></center>
+                </div>
+            </article>
+        </section>
         
         <!-- lungo.js dependencies -->
         <script src="components/quojs/quo.js"></script>
