@@ -62,6 +62,8 @@ var StorageKey = {
     port: "settings-port-key"
 };
 
+initSettings();
+
 var E = {
     timeout: "Time out",
     abort: "Abort",
@@ -93,6 +95,13 @@ var API = {
     test: apiPrefix("test"),
     uploadPhoto: apiPrefix("photo/upload")
 };
+
+function initSettings(){
+    if( localStorage.getItem(StorageKey.server) == null ){
+        localStorage.setItem(StorageKey.server, "http://letshire-dev-yuan.cloudfoundry.com");
+        localStorage.setItem(StorageKey.port, "80");
+    }
+}
 
 function apiPrefix( action ){
     var domain = localStorage.getItem(StorageKey.server);
@@ -205,6 +214,22 @@ function onFail(message){
 // **************************************
 // LetsHire Event Handler
 // **************************************
+
+Lungo.dom("#settings").on("load", function(event){
+    $("input#settings-server").val( localStorage.getItem(StorageKey.server) );
+    $("input#settings-port").val( localStorage.getItem(StorageKey.port) );
+});
+
+
+var pullInterviewsList = new Lungo.Element.Pull("#interviews-article",{
+	onPull: "Pull down to refresh.",
+	onRelease: "Release to get new data",
+	onRefresh: "Refreshing...",
+	callback: function(){
+		//TODO: to refresh the data
+		pullInterviewsList.hide();
+	}
+});
 
 // settings
 // TODO: checking animation
