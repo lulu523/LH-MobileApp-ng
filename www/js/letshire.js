@@ -91,7 +91,7 @@ var API = {
         return domain + "/api/v1/interviews/" + interview_id + ".json?auth_token=" + G.auth_token;    
     },
     test: apiPrefix("test"),
-    uploadPhoto: apiPrefix("photo/upload");
+    uploadPhoto: apiPrefix("photo/upload")
 };
 
 function apiPrefix( action ){
