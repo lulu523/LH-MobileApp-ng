@@ -47,7 +47,6 @@ Lungo.init({
     name: "LetsHire"
 });
 
-
 // **************************************
 // Global Variables and Helpers
 // **************************************
@@ -139,6 +138,14 @@ function nextStatus(status){
     return next_status;
 }
 
+function showLoading(message){
+    Lungo.Notification.show();
+}
+
+function hideNotification(){
+    Lungo.Notification.hide();
+}
+
 // Generic File Uploader
 function uploadPhoto(imageURI) {
     var options = new FileUploadOptions();
@@ -216,11 +223,13 @@ $("#settings-save-button").on("click", function(e){
 });
 
 // login
-// TODO: animation during loading
 $("#main-login-button").on("click", function(e){
     var username = $("input#main-username").val();
     var password = $("input#main-password").val();
     var formData = {"user" : { "email": username, "password": password }}
+    
+    showLoading("Signing in ...")
+    
     $.ajax({
         type: "POST",
         url: API.login,
@@ -229,6 +238,7 @@ $("#main-login-button").on("click", function(e){
         data: JSON.stringify(formData),
         contentType: "application/json"
     }).done(function(response){
+        hideNotification();
         // store session info
         G.auth_token = response["session"]["auth_token"];
         G.username = username;
@@ -238,12 +248,14 @@ $("#main-login-button").on("click", function(e){
         // navigate
         Lungo.Router.section("interviews");   
     }).fail(function(jqXHR, status){
+        hideNotification();
         errorAlert(jqXHR, status);
     });
 });
 
 // logout
 $("#options-logout").on("click", function(e){
+    Lungo.View.Aside.hide("#user-options");
     $.ajax({
         type: "GET",
         url: API.logout       
@@ -279,12 +291,16 @@ function letshireCtrl($scope){
     // get interviews in one 'interval', interval = {'1d', '1w', '1m'}
     $scope.interviewsIn = function(interval){
         Lungo.View.Aside.hide("#user-options");
+        showLoading("");
         $.ajax({
            url: API.interviews(interval),
            type: "GET"
         }).done(function(response){
             $scope.interviews = response["interviews"];
+            $scope.$apply();
+            hideNotification();
         }).fail(function(jqXHR, status){
+            hideNotification();
             errorAlert(jqXHR, status);    
         });
     };
@@ -292,13 +308,17 @@ function letshireCtrl($scope){
     // get specific interview details
     $scope.interviewDetail = function(interviewId){
         console.log("interview id is " + interviewId);
+        Lungo.
         $.ajax({
             url: API.interview(interviewId),
             type: "GET"
         }).done(function(response){
             $scope.interview = response["interview"];
+            $scope.$apply();
+            hideNotification();
         }).fail(function(jqXHR, status){
-           errorAlert(jqXHR, status); 
+            hideNotification();
+            errorAlert(jqXHR, status); 
         });
         Lungo.Router.section("interview");
     };
@@ -319,13 +339,4 @@ function letshireCtrl($scope){
         alert("Not implemented yet");  
     };
 }
-
-
-
-
-
-
-
-
-
 
