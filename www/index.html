@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <title>Lets Hire</title>
+        
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="js/lungo/lungo.css">
+        <link rel="stylesheet" href="js/lungo/lungo.icon.css">
+        <link rel="stylesheet" href="js/lungo/lungo.icon.brand.css">
+        <link rel="stylesheet" href="js/lungo/lungo.css">
+        <link rel="stylesheet" href="js/lungo/theme.lungo.css">
+        
+    </head>
+    
+    <body class="app" ng-controller="letshireCtrl">
+        <!-- main page: login page, can switch to settings and interviews -->
+        <section id="main">
+            <article id="main-article" class="indented splash active" >
+                <h1>LetsHire</h1>
+                <form class="roundeds">
+                    <input type="text" placeholder="Your username" id="main-username" value />
+                    <input type="password" placeholder="Your password" id="main-password" value />
+                    <a id="main-login-button" class="button large theme anchor" data-icon="lock">Login</a>
+                    <a href="#settings" data-router="section" class="button secondary anchor" data-icon="settings">Settings </a>
+                </form>
+            </article>
+        </section>
+        
+        <!-- interviews page: to list all the interviews info, and give one aside panel to display some options of the app -->
+        <section id="interviews">
+            <header>
+                <nav>
+                    <a href="#user-options" data-icon="vcard" data-router="aside" class="left"></a>
+                    <a href="#about" data-router="section" data-icon="help" class="right"></a>
+                </nav>
+                <a id="interviews-username"><strong>user@domain.com</strong></a>     
+            </header>
+            
+            <article id="interviews-article" class="active list">
+                <ul>
+                    <li ng-repeat="interview in interviews" class="selectable">
+                        <a ng-click="interviewDetail(interview.id)">
+                            <div class="right tag blue" data-icon="clock">
+                                next Interview
+                            </div>
+                            <strong>{{interview.title}}</strong>
+                            <small>{{interview.scheduled_at}} @ {{interview.location}}</small>
+                        </a>    
+                    </li>
+                </ul>    
+            </article>
+            
+            <footer>
+                <nav>
+                    <a href="#interviews" data-icon="refresh"></a>
+                    <a href="#" data-icon="search"></a>
+                </nav>
+            </footer>
+        </section>
+        
+        <!-- options panel aside -->
+        <aside id="user-options" class="left">
+            <header data-title="Options"></header>
+            <article id="user-options-article" class="active list"> 
+                <ul>
+                    <li class="selectable dark">
+                        <a href="" id="options-today-interviews" class="options-interviews" data-interval="1d" ng-click="interviewsToday()">
+                            <strong>Interviews Today</strong>    
+                        </a>
+                        
+                    </li>
+                    <li class="selectable dark">
+                        <a href="" id="options-week-interviews" class="options-interviews" data-interval="1w" ng-click="interviewsThisWeek()">
+                            <strong>Interviews This Week</strong>    
+                        </a>
+                    </li>
+                    <li class="selectable dark">
+                        <a href="" id="options-month-interviews" class="options-interviews" data-interval="1m" ng-click="interviewsThisMonth()">
+                            <strong>Interviews This Month</strong>    
+                        </a>
+                    </li>
+                    <li class="selectable dark">
+                        <a href="" id="options-logout">
+                            <strong>Log out</strong>    
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </aside>
+        
+        <!-- interview page: to show the basic info of the interview and the attachements -->
+        <section id="interview">
+            <header data-title="Interview Details" data-back="left blue"></header>
+            
+            <nav class="groupbar">
+                <a href="#interview-article-basic" data-router="article" class="active">
+                    Basic Info
+                </a>
+                <a href="#interview-article-attachment" data-router="article">
+                    Attachments
+                </a>
+            </nav>
+            
+            <article id="interview-article-basic" class="active">
+                <div class="form">
+                    <fieldset>
+                        <input disabled>
+                    </fieldset>
+                    <fieldset data-icon="user">
+                        <label>Name:</label>
+                        <input id="interview-details-name" type="text" value="{{interview.name}}" disabled>
+                    </fieldset>
+                    <fieldset data-icon="eye">
+                        <label>Apply:</label>
+                        <input id="interview-details-apply" type="text" value="Software Engineer" disabled>
+                    </fieldset>
+                    <fieldset data-icon="calendar">
+                        <label>Time:</label>
+                        <input id="interview-details-time" type="text" value="{{interview.scheduled_at}}" disabled>
+                    </fieldset>
+                    <fieldset data-icon="compass">
+                        <label>Location:</label>
+                        <input id="interview-details-location" type="text" value="{{interview.location}}" disabled>
+                    </fieldset>
+                    <fieldset data-icon="ticket">
+                        <label>Status:</label>
+                        <input id="interview-details-status" type="text" value="{{interview.status}}" disabled>
+                    </fieldset>
+                    <fieldset data-icon="phone">
+                        <label>Phone:</label>
+                        <input id="interview-details-phone" type="text" value="{{interview.phone}}" disabled>
+                    </fieldset>
+                </div>
+            </article>
+            
+            <article id="interview-article-attachment">
+                TODO: attachemnts gallery
+            </article>
+            
+            <footer>
+                <nav>
+                    <a id="interivew-action" href="" ng-click="changeInterviewStatus()" data-icon="home" ></a>
+                    <a id="interview-attach-picture" href="" ng-click="attachInterviewPhoto()" data-icon="picture" ></a>
+                    <a id="interview-attach-audio" href="" ng-click="attachInterviewAudio()" data-icon="microphone" ></a>
+                    <a id="interview-feedback" href="#feedback" data-router="section" data-icon="pencil" ></a>
+                </nav>
+            </footer>
+        </section>
+
+        <!-- feedback page, can give feedback to some specific interview -->
+        <section id="feedback">
+            <header data-title="Feedback" data-back="left blue"></header>
+            <article id="feedback-article" class="active">
+                <div class="form">
+                    <fieldset>
+                        <textarea id="feedback-textarea" rows="5" autofocus></textarea>    
+                    </fieldset>
+                    <a href="#" class="button anchor">Save</a>
+                </div>
+            </article>
+        </section>
+        
+        <!-- settings page: to configure the server domain and port -->
+        <section id="settings">
+            <header data-title="Settings" data-back="left blue"></header>
+            <article id="settings-article" class="active">
+                <div class="form">
+                    <fieldset>
+                        <label>Server:</label>
+                        <br>
+                        <input id="settings-server" type="text">
+                    </fieldset>
+                    <fieldset>
+                        <label>Port:</label>
+                        <br>
+                        <input id="settings-port" type="text">
+                    </fieldset>
+                    <a id="settings-save-button" class="button anchor">Save</a>                    
+                </div>    
+            </article>
+        </section>
+        
+        <!-- about page: intro to the team and this app -->
+        <section id="about">
+            <header data-title="About" data-back="left blue"></header>
+            <article id="about-article" class="active">
+                <div>
+                    <center><h1>LetsHire Mobile</h1></center>
+                    <br>
+                    <center><a href="http://letshire.cloudfoundry.com">letshire.cloudfoundry.com</a></center>
+                    <br>
+                    <center>by</center>
+                    <center><h3>Tempest Dev Empathy</h3></center>
+                </div>
+            </article>
+        </section>
+        
+        <!-- lungo.js dependencies -->
+        <script src="js/quojs/quo.js"></script>
+        <script src="js/lungo/lungo.js"></script>
+
+        <!-- loading other js libraries -->
+        <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        
+        <!-- letshire script -->
+        <script src="js/letshire.js"></script>
+        
+    </body>
+</html>
