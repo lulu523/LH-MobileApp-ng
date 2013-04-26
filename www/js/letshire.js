@@ -308,7 +308,7 @@ function letshireCtrl($scope){
     // get specific interview details
     $scope.interviewDetail = function(interviewId){
         console.log("interview id is " + interviewId);
-        Lungo.
+        showLoading();
         $.ajax({
             url: API.interview(interviewId),
             type: "GET"
