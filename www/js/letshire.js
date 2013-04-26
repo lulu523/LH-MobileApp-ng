@@ -91,7 +91,7 @@ var API = {
         return domain + "/api/v1/interviews/" + interview_id + ".json?auth_token=" + G.auth_token;    
     },
     test: apiPrefix("test"),
-    uploadPhoto: ""
+    uploadPhoto: apiPrefix("photo/upload");
 };
 
 function apiPrefix( action ){
@@ -253,20 +253,6 @@ $("#main-login-button").on("click", function(e){
     });
 });
 
-// logout
-$("#options-logout").on("click", function(e){
-    Lungo.View.Aside.hide("#user-options");
-    $.ajax({
-        type: "GET",
-        url: API.logout       
-    }).always(function(e){
-        G.auth_token = "",
-        G.current_user_id = "",
-        G.username = "",
-        Lungo.Router.section("main");
-    });    
-});
-
 function letshireCtrl($scope){
     
     // the interviews will be showed on the interviews page
@@ -274,6 +260,23 @@ function letshireCtrl($scope){
     
     // the specific interview details that will be showed on the interview page
     $scope.interview = {};
+    
+    // login
+    // TODO:
+    
+    // logout
+    $scope.letshireLogout = function(){
+        Lungo.View.Aside.hide("#user-options");
+        $.ajax({
+            type: "GET",
+            url: API.logout       
+        }).always(function(e){
+            G.current_user_id = "",
+            G.username = "",
+            Lungo.Router.section("main"),
+            G.auth_token = ""
+        });   
+    };
     
     // three entries to trigger the interviews updated.
     $scope.interviewsToday = function(){
