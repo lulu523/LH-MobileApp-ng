@@ -246,7 +246,7 @@ $("#main-login-button").on("click", function(e){
         // update some info ui
         $("#interviews-username").text(G.username);
         // navigate
-        Lungo.Router.section("interviews");   
+        Lungo.Router.section("interviews");
     }).fail(function(jqXHR, status){
         hideNotification();
         errorAlert(jqXHR, status);
@@ -331,7 +331,7 @@ function letshireCtrl($scope){
     
     // attach photo callback
     $scope.attachInterviewPhoto = function(){
-        alert("TODO");
+       capturePhoto();
     };
     
     // attach audio callback
